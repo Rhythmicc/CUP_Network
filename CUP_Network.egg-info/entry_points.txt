@@ -1,0 +1,2 @@
+[console_scripts]
+cup-network = CUP_Network.main:main

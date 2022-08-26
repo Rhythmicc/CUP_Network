@@ -1,0 +1,11 @@
+README.md
+setup.py
+CUP_Network/__init__.py
+CUP_Network/main.py
+CUP_Network.egg-info/PKG-INFO
+CUP_Network.egg-info/SOURCES.txt
+CUP_Network.egg-info/dependency_links.txt
+CUP_Network.egg-info/entry_points.txt
+CUP_Network.egg-info/requires.txt
+CUP_Network.egg-info/top_level.txt
+CUP_Network.egg-info/zip-safe
