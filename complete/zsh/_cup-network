@@ -1,0 +1,39 @@
+#compdef cup-network
+
+local cur prev
+cur=${words[CURRENT]}
+prev=${words[CURRENT-1]}
+
+(( $+functions[_cup_network_args_comp] )) || 
+_cup_network_args_comp() {
+    local -a opt_args
+    if [[ ${prev} == login ]]; then
+        opt_args=(
+            
+        )
+    else
+        _arguments -S -s '*:filename:_files'
+        return
+    fi
+    
+    _describe subcommand opt_args
+}
+
+(( $+functions[_cup_network_main] )) || 
+_cup_network_main() {
+    local -a args
+    args=(
+        --help:'获取帮助'
+        login:'利用 selenium 自动登录校园网'
+        logout:'利用 selenium 自动登出校园网'
+        init:'在Ubuntu上自动安装 google-chrome 和 chromedriver'
+    )
+
+    _describe -t common-commands 'common commands' args && _ret=0
+}
+
+if (( ${#words} >= 3 )); then
+    _cup_network_args_comp
+else
+    _cup_network_main
+fi

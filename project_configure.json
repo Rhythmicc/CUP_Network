@@ -1,7 +1,7 @@
 {
  "compile_tool": "",
- "compile_filename": "",
- "executable_filename": "",
+ "compile_filename": "CUP_Network/main.py",
+ "executable_filename": "python3 -m CUP_Network.main",
  "input_file": "",
  "template_root": "",
  "server_targets": [

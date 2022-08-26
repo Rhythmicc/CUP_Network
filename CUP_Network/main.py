@@ -12,7 +12,6 @@ def login(username: str, password: str):
 
     :param username: 校园网账号
     :param password: 校园网密码
-    :return:
     """
     from . import login
     with QproDefaultConsole.status('正在登录校园网...'):
@@ -23,8 +22,6 @@ def login(username: str, password: str):
 def logout():
     """
     利用 selenium 自动登出校园网
-
-    :return:
     """
     from . import logout
     with QproDefaultConsole.status('正在登出校园网...'):
