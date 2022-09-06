@@ -39,8 +39,7 @@ def init_config():
 
 
 class CUPNetworkConfig:
-    def __init__(self, config_path):
-        self.config_path = config_path
+    def __init__(self):
         if not os.path.exists(config_path):
             init_config()
         with open(config_path) as f:
