@@ -1,5 +1,6 @@
 README.md
 setup.py
+CUP_Network/__config__.py
 CUP_Network/__init__.py
 CUP_Network/main.py
 CUP_Network.egg-info/PKG-INFO

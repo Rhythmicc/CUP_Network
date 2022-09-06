@@ -1,21 +1,20 @@
 from QuickProject.Commander import Commander
 from QuickProject import QproDefaultConsole
+from .__config__ import CUPNetworkConfig
 
 
+config = CUPNetworkConfig()
 app = Commander()
 
 
 @app.command()
-def login(username: str, password: str):
+def login():
     """
     利用 selenium 自动登录校园网
-
-    :param username: 校园网账号
-    :param password: 校园网密码
     """
     from . import login
     with QproDefaultConsole.status('正在登录校园网...'):
-        login(username, password)
+        login(config['username'], config['password'])
 
 
 @app.command()
@@ -26,6 +25,15 @@ def logout():
     from . import logout
     with QproDefaultConsole.status('正在登出校园网...'):
         logout()
+
+
+@app.command()
+def reset():
+    """
+    重置校园网账号密码
+    """
+    from .__config__ import init_config
+    init_config()
 
 
 @app.command()
