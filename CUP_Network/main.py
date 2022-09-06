@@ -14,7 +14,7 @@ def login():
     """
     from . import login
     with QproDefaultConsole.status('正在登录校园网...'):
-        login(config['username'], config['password'])
+        login(config.select('username'), config.select('password'))
 
 
 @app.command()

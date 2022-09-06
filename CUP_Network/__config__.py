@@ -42,15 +42,15 @@ class CUPNetworkConfig:
     def __init__(self):
         if not os.path.exists(config_path):
             init_config()
-        with open(config_path) as f:
+        with open(config_path, 'r') as f:
             self.config = json.load(f)
 
-    def __getattr__(self, item):
+    def select(self, item):
         if item not in self.config and item in problems:
-            self[item] = encode_password(_ask(problems[item]))
+            self.update(item, encode_password(_ask(problems[item])))
         return decode_password(self.config[item])
 
-    def __setattr__(self, key, value):
+    def update(self, key, value):
         self.config[key] = value
         with open(self.config_path, 'w') as f:
             json.dump(self.config, f, indent=4, ensure_ascii=False)
