@@ -5,7 +5,7 @@
 ## 安装
 
 ```sh
-pip3 install CUP_Network
+pip3 install cup-network -U
 ```
 
 ## 使用
@@ -19,3 +19,5 @@ pip3 install CUP_Network
 | login | `cup-network login <username> <password>` | 登录 |
 | logout | `cup-network logout` | 登出 |
 | init | `cup-network init` | 自动在Ubuntu上安装chrome driver |
+| reset | `cup-network reset` | 重置密码 |
+
