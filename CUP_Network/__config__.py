@@ -5,7 +5,7 @@ from QuickProject import user_root, _ask, QproDefaultConsole, QproInfoString
 
 config_path = os.path.join(user_root, '.cup-network')
 
-problems = {
+questions = {
     'username': {
         'type': 'input',
         'name': 'username',
@@ -29,12 +29,7 @@ def decode_password(password):
 
 def init_config():
     with open(config_path, 'w') as f:
-        json.dump(
-            {
-                'username': encode_password(_ask(problems['username'])),
-                'password': encode_password(_ask(problems['password'])),
-            }, f, indent=4, ensure_ascii=False
-        )
+        json.dump({i: encode_password(_ask(questions[i])) for i in questions}, f, indent=4, ensure_ascii=False)
     QproDefaultConsole.print(QproInfoString, f'您的校园网账号和密码已加密保存在 "{config_path} 中!"')
 
 
@@ -46,8 +41,8 @@ class CUPNetworkConfig:
             self.config = json.load(f)
 
     def select(self, item):
-        if item not in self.config and item in problems:
-            self.update(item, encode_password(_ask(problems[item])))
+        if item not in self.config and item in questions:
+            self.update(item, encode_password(_ask(questions[item])))
         return decode_password(self.config[item])
 
     def update(self, key, value):

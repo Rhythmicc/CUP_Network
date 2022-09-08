@@ -46,6 +46,15 @@ def init():
     os.system('sudo apt-get install chromium-chromedriver')
 
 
+@app.command()
+def status():
+    """
+    查看校园网状态
+    """
+    from . import status
+    status()
+
+
 def main():
     """
     注册为全局命令时, 默认采用main函数作为命令入口, 请勿将此函数用作它途.

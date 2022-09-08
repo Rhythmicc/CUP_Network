@@ -59,3 +59,23 @@ def logout():
     finally:
         driver.close()
         driver.quit()
+
+
+def status():
+    """
+    查看校园网状态
+
+    :return:
+    """
+    from QuickProject import QproDefaultConsole, QproErrorString, QproInfoString
+    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver.get("http://login.cup.edu.cn/")
+    time.sleep(sleep_time)
+    try:
+        status = driver.find_elements(By.CLASS_NAME, "info")[1].text
+        QproDefaultConsole.print(QproInfoString, f'登录状态 {status}')
+    except Exception as e:
+        QproDefaultConsole.print(QproErrorString, '未登录')
+    finally:
+        driver.close()
+        driver.quit()
