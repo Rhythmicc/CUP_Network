@@ -1,9 +1,6 @@
 from QuickProject.Commander import Commander
 from QuickProject import QproDefaultConsole
-from .__config__ import CUPNetworkConfig
 
-
-config = CUPNetworkConfig()
 app = Commander()
 
 
@@ -13,8 +10,9 @@ def login():
     利用 selenium 自动登录校园网
     """
     from . import login
-    with QproDefaultConsole.status('正在登录校园网...'):
-        login(config.select('username'), config.select('password'))
+
+    with QproDefaultConsole.status("正在登录校园网..."):
+        login()
 
 
 @app.command()
@@ -23,7 +21,8 @@ def logout():
     利用 selenium 自动登出校园网
     """
     from . import logout
-    with QproDefaultConsole.status('正在登出校园网...'):
+
+    with QproDefaultConsole.status("正在登出校园网..."):
         logout()
 
 
@@ -33,6 +32,7 @@ def reset():
     重置校园网账号密码
     """
     from .__config__ import init_config
+
     init_config()
 
 
@@ -42,8 +42,9 @@ def init():
     在Ubuntu上自动安装 google-chrome 和 chromedriver
     """
     import os
-    os.system('sudo apt-get install google-chrome-stable')
-    os.system('sudo apt-get install chromium-chromedriver')
+
+    os.system("sudo apt-get install google-chrome-stable")
+    os.system("sudo apt-get install chromium-chromedriver")
 
 
 @app.command()
@@ -52,6 +53,7 @@ def status():
     查看校园网状态
     """
     from . import status
+
     status()
 
 
@@ -63,5 +65,5 @@ def main():
     app()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

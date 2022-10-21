@@ -1,16 +1,38 @@
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.errorhandler import ElementNotInteractableException, ElementClickInterceptedException
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.remote.errorhandler import (
+    ElementNotInteractableException,
+    ElementClickInterceptedException,
+)
 
+from .__config__ import CUPNetworkConfig
+
+
+config = CUPNetworkConfig()
 sleep_time = 1
 
-chrome_options=Options()
-chrome_options.add_argument('--headless')
+
+def _get_driver():
+    if config.select("docker-url") != "无" and config.select("docker-url") != "":
+        from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
+        driver = webdriver.Remote(
+            command_executor=config.select("docker-url"),
+            desired_capabilities=DesiredCapabilities.CHROME,
+        )
+    else:
+        from selenium.webdriver.chrome.options import Options
+
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        driver = webdriver.Chrome(chrome_options=chrome_options)
+    return driver
 
 
-def login(username, password):
+def login(
+    username: str = config.select("username"), password: str = config.select("password")
+):
     """
     利用 selenium 自动登录校园网
 
@@ -18,7 +40,7 @@ def login(username, password):
     :param password: 校园网密码
     :return:
     """
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver = _get_driver()
     driver.get("http://login.cup.edu.cn")
     time.sleep(sleep_time)
     try:
@@ -29,9 +51,11 @@ def login(username, password):
         time.sleep(sleep_time)
     except ElementNotInteractableException:
         from QuickProject import QproDefaultConsole, QproErrorString
+
         QproDefaultConsole.print(QproErrorString, "无法填入账号密码, 请检查是否已经登录。")
     except Exception as e:
         from QuickProject import QproDefaultConsole
+
         QproDefaultConsole.print_exception()
     finally:
         driver.close()
@@ -44,7 +68,7 @@ def logout():
 
     :return:
     """
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver = _get_driver()
     driver.get("http://login.cup.edu.cn/srun_portal_success?ac_id=1&theme=cup")
     time.sleep(sleep_time)
     try:
@@ -52,9 +76,11 @@ def logout():
         time.sleep(sleep_time)
     except ElementClickInterceptedException:
         from QuickProject import QproDefaultConsole, QproErrorString
-        QproDefaultConsole.print(QproErrorString, '无法点击注销按钮，请检查是否已经登录。')
+
+        QproDefaultConsole.print(QproErrorString, "无法点击注销按钮，请检查是否已经登录。")
     except Exception as e:
         from QuickProject import QproDefaultConsole
+
         QproDefaultConsole.print_exception()
     finally:
         driver.close()
@@ -68,14 +94,15 @@ def status():
     :return:
     """
     from QuickProject import QproDefaultConsole, QproErrorString, QproInfoString
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+
+    driver = _get_driver()
     driver.get("http://login.cup.edu.cn/")
     time.sleep(sleep_time)
     try:
         status = driver.find_elements(By.CLASS_NAME, "info")[1].text
-        QproDefaultConsole.print(QproInfoString, f'登录状态 {status}')
+        QproDefaultConsole.print(QproInfoString, f"{status}")
     except Exception as e:
-        QproDefaultConsole.print(QproErrorString, '未登录')
+        QproDefaultConsole.print(QproErrorString, "未登录")
     finally:
         driver.close()
         driver.quit()
