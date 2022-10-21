@@ -55,5 +55,5 @@ class CUPNetworkConfig:
 
     def update(self, key, value):
         self.config[key] = value
-        with open(self.config_path, "w") as f:
+        with open(config_path, "w") as f:
             json.dump(self.config, f, indent=4, ensure_ascii=False)
