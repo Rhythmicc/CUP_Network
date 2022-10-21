@@ -37,14 +37,41 @@ def reset():
 
 
 @app.command()
-def init():
+def config(key: str, value: str = None):
     """
-    在Ubuntu上自动安装 google-chrome 和 chromedriver
+    操作配置表
     """
-    import os
+    from . import config
 
-    os.system("sudo apt-get install google-chrome-stable")
-    os.system("sudo apt-get install chromium-chromedriver")
+    if value is None:
+        QproDefaultConsole.print(key, config.select(key))
+    else:
+        config.update(key, value)
+
+
+@app.command()
+def doc():
+    """
+    文档
+    """
+    QproDefaultConsole.print(
+        "[bold cyan][CUP_Network][/]", "CUP校园网命令工具", justify="center"
+    )
+    QproDefaultConsole.print("[bold]作者: RhythmLian[/]\n", justify="center")
+    QproDefaultConsole.print(
+        """\
+在无桌面系统中，推荐使用docker部署selenuim，再使用此工具。大致步骤如下:
+
+1. 安装docker
+2. 运行命令: "docker run -d -p <某个端口号>:4444 --shm-size=2g selenium/standalone-chrome"
+3. 初次运行 "cup-network" 会自动引导进行配置。
+   1. 命令: "cup-network config <key> \[value]" 可以修改配置。
+      对于 "value" 参数: 不填写表示查询, 设置为 [bold magenta]None[/] 表示删除此项。
+   2. 命令: "cup-network config docker-url http://<IP或域名>:<某个端口号>/wd/hub" 可设置使用docker selenium 
+      (1) 注意: <某个端口号> 为第二步中的端口号
+      (2) 注意: <IP或域名> 为服务器的IP或域名
+                服务器非本机的情况下，需要保证服务器与本机在同一局域网内。"""
+    )
 
 
 @app.command()

@@ -25,8 +25,29 @@ const completionSpec: Fig.Spec = {
             "options": []
         },
         {
-            "name": "init",
-            "description": "在Ubuntu上自动安装 google-chrome 和 chromedriver",
+            "name": "config",
+            "description": "操作配置表",
+            "args": [
+                {
+                    "name": "key",
+                    "description": "<key>"
+                },
+                {
+                    "name": "value",
+                    "description": "<value>"
+                }
+            ],
+            "options": []
+        },
+        {
+            "name": "doc",
+            "description": "文档",
+            "args": [],
+            "options": []
+        },
+        {
+            "name": "status",
+            "description": "查看校园网状态",
             "args": [],
             "options": []
         }

@@ -54,6 +54,9 @@ class CUPNetworkConfig:
         return decode_password(self.config[item])
 
     def update(self, key, value):
-        self.config[key] = value
+        if not value or value == "None":
+            self.config.pop(key, None)
+        else:
+            self.config[key] = encode_password(value)
         with open(config_path, "w") as f:
             json.dump(self.config, f, indent=4, ensure_ascii=False)

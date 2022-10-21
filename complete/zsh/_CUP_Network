@@ -7,9 +7,14 @@ prev=${words[CURRENT-1]}
 (( $+functions[_CUP_Network_args_comp] )) || 
 _CUP_Network_args_comp() {
     local -a opt_args
-    
-_arguments -S -s '*:filename:_files'
-return
+    if [[ ${prev} == config ]]; then
+        opt_args=(
+            
+        )
+else
+    _arguments -S -s '*:filename:_files'
+    return
+fi
 
     _describe subcommand opt_args
 }
@@ -22,7 +27,9 @@ _CUP_Network_main() {
         login:'利用 selenium 自动登录校园网'
         logout:'利用 selenium 自动登出校园网'
         reset:'重置校园网账号密码'
-        init:'在Ubuntu上自动安装 google-chrome 和 chromedriver'
+        config:'操作配置表'
+        doc:'文档'
+        status:'查看校园网状态'
     )
 
     _describe -t common-commands 'common commands' args && _ret=0
