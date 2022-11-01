@@ -1,7 +1,7 @@
 from QuickProject.Commander import Commander
 from QuickProject import QproDefaultConsole
 
-app = Commander()
+app = Commander("cup-network")
 
 
 @app.command()
