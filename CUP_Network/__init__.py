@@ -14,7 +14,7 @@ sleep_time = 1
 
 
 def _get_driver():
-    if config.select("docker-url") != "无" and config.select("docker-url") != "":
+    if config.select("docker-url") != "":
         from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
         driver = webdriver.Remote(

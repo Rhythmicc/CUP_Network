@@ -17,7 +17,6 @@ questions = {
     "docker-url": {
         "type": "input",
         "message": "远程selenuim服务器地址",
-        "default": "无",
     },
 }
 
