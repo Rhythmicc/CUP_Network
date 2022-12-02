@@ -49,7 +49,8 @@ class CUPNetworkConfig:
 
     def select(self, item):
         if item not in self.config and item in questions:
-            self.update(item, encode_password(_ask(questions[item])))
+            res = _ask(questions[item])
+            self.update(item, encode_password(res) if item != "docker-url" else res)
         return (
             decode_password(self.config[item])
             if item != "docker-url"
@@ -60,6 +61,6 @@ class CUPNetworkConfig:
         if not value or value == "None":
             self.config.pop(key, None)
         else:
-            self.config[key] = encode_password(value)
+            self.config[key] = value
         with open(config_path, "w") as f:
             json.dump(self.config, f, indent=4, ensure_ascii=False)
