@@ -91,7 +91,7 @@ def status():
     """
     查看校园网状态
 
-    :return:
+    :return: True 为已登录，False 为未登录
     """
     from QuickProject import QproDefaultConsole, QproErrorString, QproInfoString
 
@@ -101,8 +101,11 @@ def status():
     try:
         status = driver.find_elements(By.CLASS_NAME, "info")[1].text
         QproDefaultConsole.print(QproInfoString, f"{status}")
+        flag = True
     except Exception as e:
         QproDefaultConsole.print(QproErrorString, "未登录")
+        flag = False
     finally:
         driver.close()
         driver.quit()
+    return flag

@@ -84,6 +84,18 @@ def status():
     status()
 
 
+@app.command()
+def cron():
+    """
+    检查并保持登录状态
+    """
+    from . import login, status
+
+    flag = status()
+    if not flag:
+        login()
+
+
 def main():
     """
     注册为全局命令时, 默认采用main函数作为命令入口, 请勿将此函数用作它途.
