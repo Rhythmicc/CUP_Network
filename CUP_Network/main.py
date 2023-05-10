@@ -37,13 +37,13 @@ def reset():
 
 
 @app.command()
-def config(key: str, value: str = None):
+def config(key: str, value: str = ""):
     """
     操作配置表
     """
     from . import config
 
-    if value is None:
+    if not value:
         QproDefaultConsole.print(key, config.select(key))
     else:
         config.update(key, value)
