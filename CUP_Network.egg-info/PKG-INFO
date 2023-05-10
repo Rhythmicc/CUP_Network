@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: CUP-Network
-Version: 0.0.14
+Version: 0.0.15
 Summary: Draw Mtx As Thumbnail
 Home-page: https://github.com/Rhythmicc/CUP_Network
 Author: RhythmLian
@@ -10,6 +10,7 @@ Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown
+License-File: LICENSE
 
 # CUP_Network
 

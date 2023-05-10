@@ -1,3 +1,4 @@
+LICENSE
 README.md
 setup.py
 CUP_Network/__config__.py
